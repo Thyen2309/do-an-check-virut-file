@@ -1,0 +1,29 @@
+# Requirements for File Security Checker
+
+# GUI (optional, for GUI version)
+# Tkinter comes built-in with Python
+
+# File handling
+python-magic==0.4.27
+python-magic-bin==0.4.14
+
+# Data processing
+pandas==2.0.3
+
+# Configuration
+python-dotenv==1.0.0
+
+# Logging
+colorlog==6.7.0
+
+# Testing
+pytest==7.4.0
+pytest-cov==4.1.0
+
+# Code quality
+pylint==2.17.5
+black==23.7.0
+isort==5.12.0
+
+# Documentation
+Sphinx==7.0.1

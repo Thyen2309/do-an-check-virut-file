@@ -1,0 +1,37 @@
+{
+  "f9e4c8a2b1d5e6a7c8b9d0e1f2a3b4c5": {
+    "threat_name": "Trojan.PDF.Exploit.Z",
+    "threat_category": "Trojan",
+    "severity": 9,
+    "detected_by": 47,
+    "first_seen": "2024-02-15"
+  },
+  "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6": {
+    "threat_name": "Win32.Malware.Generic",
+    "threat_category": "Malware",
+    "severity": 8,
+    "detected_by": 52,
+    "first_seen": "2024-01-20"
+  },
+  "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7": {
+    "threat_name": "Trojan.Win32.Emotet.A",
+    "threat_category": "Trojan",
+    "severity": 10,
+    "detected_by": 68,
+    "first_seen": "2023-11-10"
+  },
+  "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8": {
+    "threat_name": "Worm.Win32.Nimda",
+    "threat_category": "Worm",
+    "severity": 7,
+    "detected_by": 45,
+    "first_seen": "2024-01-05"
+  },
+  "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9": {
+    "threat_name": "Ransomware.Win32.Petya",
+    "threat_category": "Ransomware",
+    "severity": 10,
+    "detected_by": 71,
+    "first_seen": "2023-12-20"
+  }
+}
