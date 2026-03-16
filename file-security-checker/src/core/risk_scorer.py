@@ -13,7 +13,8 @@ class RiskScorer:
         'magic_number': 0.20,
         'hash': 0.35,
         'size': 0.10,
-        'metadata': 0.10
+        'metadata': 0.10,
+        'behavioral': 0.30
     }
     
     # Risk level thresholds
@@ -64,6 +65,11 @@ class RiskScorer:
         if double_ext.get('has_double_ext'):
             score += double_ext.get('risk_score', 0) * 0.15  # Additional penalty
         
+        # Behavioral risk (only when executable behavior analysis exists)
+        behavioral_info = analysis.get('behavioral', {})
+        behavioral_risk = behavioral_info.get('risk_score', 0)
+        score += behavioral_risk * self.WEIGHTS['behavioral']
+
         # Cap score at 10
         final_score = min(round(score, 2), 10.0)
         risk_level = self.get_risk_level(final_score)
@@ -171,6 +177,17 @@ class RiskScorer:
             reasons.append(f"🔴 CRỊTICAL: Nhập hiệu phần mở rộng kép (.{visible}.{actual})")
             reasons.append(f"   → Cuộc tấn công giả mạo! Nhìn như .{visible} nhưng thực tế .{actual}")
         
+        # Behavioral analysis reasons
+        behavioral = analysis.get('behavioral', {})
+        if behavioral.get('is_pe'):
+            if behavioral.get('has_dangerous_apis'):
+                reasons.append(
+                    f"⚠ Behavioral: phát hiện {behavioral.get('dangerous_api_count', 0)} API nguy hiểm"
+                )
+            if behavioral.get('is_packed'):
+                pack_types = ', '.join(behavioral.get('packing_types', [])) or 'unknown'
+                reasons.append(f"⚠ Behavioral: file có dấu hiệu bị pack/encrypt ({pack_types})")
+
         return reasons
     
     def get_recommendation(self, risk_level: str, analysis: dict = None) -> str:
@@ -226,7 +243,8 @@ class RiskScorer:
                 'magic_number': analysis.get('magic_number', {}),
                 'size': analysis.get('size', {}),
                 'hash_status': analysis.get('hash_status', {}),
-                'double_extension': analysis.get('double_extension', {})
+                'double_extension': analysis.get('double_extension', {}),
+                'behavioral': analysis.get('behavioral', {})
             },
             'risk_assessment': {
                 'total_score': score,
