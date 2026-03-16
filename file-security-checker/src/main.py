@@ -167,7 +167,7 @@ def main():
         print(f'Kích thước: {file_info.get("file_size_kb")} KB')
         print(f'Mã hash: {file_info.get("file_hash", "Không có")[:16]}...')
         
-        print(f'\nĐiểm rủi ro: {risk_info.get("total_score")}/10 - {risk_info.get("level")}')
+        print(f'\nĐiểm rủi ro: {int(risk_info.get("total_score", 0))}/10 - {risk_info.get("level")}')
         
         print('\nLý do:')
         for reason in risk_info.get('reasons', []):
