@@ -27,7 +27,7 @@ DANGEROUS_EXTENSIONS = {
     'exe', 'dll', 'com', 'scr', 'vbs', 'js', 'jse',
     'bat', 'cmd', 'ps1', 'psc1', 'msh', 'msh1', 'msh2', 'mshxml',
     'msh1xml', 'msh2xml', 'sh', 'app', 'msi', 'psz', 'mst', 'ocx',
-    'cpl', 'hta', 'sct', 'zip', 'rar', 'iso', 'cab', 'scr', 'pif'
+    'cpl', 'hta', 'sct', 'scr', 'pif', 'jar', 'apk'
 }
 
 # Safe extensions

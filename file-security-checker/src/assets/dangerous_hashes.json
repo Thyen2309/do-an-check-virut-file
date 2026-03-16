@@ -1,4 +1,18 @@
 {
+  "13db60afb914a2ee9b3649d1947d58046d1a9e9b8e4114d80b1d5c142b4ed7fa": {
+    "threat_name": "EICAR-STANDARD-ANTIVIRUS-TEST-FILE",
+    "threat_category": "Test Virus",
+    "severity": 10,
+    "detected_by": 99,
+    "first_seen": "2023-01-01"
+  },
+  "3395856ce81f2b7382dee7260af72b642f14140c6b64c77665e8e12ab1cce5e": {
+    "threat_name": "EICAR-STANDARD-ANTIVIRUS-TEST-FILE",
+    "threat_category": "Test File",
+    "severity": 10,
+    "detected_by": 97,
+    "first_seen": "2023-01-01"
+  },
   "f9e4c8a2b1d5e6a7c8b9d0e1f2a3b4c5": {
     "threat_name": "Trojan.PDF.Exploit.Z",
     "threat_category": "Trojan",

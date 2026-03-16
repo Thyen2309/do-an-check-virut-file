@@ -15,8 +15,7 @@ DANGEROUS_EXTENSIONS = {
     'exe', 'dll', 'com', 'scr', 'vbs', 'js', 'jse',
     'bat', 'cmd', 'ps1', 'psc1', 'msh', 'msh1', 'msh2', 'mshxml',
     'msh1xml', 'msh2xml', 'sh', 'app', 'msi', 'psz', 'mst', 'ocx',
-    'cpl', 'hta', 'sct', 'zip', 'rar', 'iso', 'cab', 'zip',
-    'scr', 'pif', 'vbs', 'js', 'action', 'apk', 'deb', 'pkg'
+    'cpl', 'hta', 'sct', 'scr', 'pif', 'jar', 'apk'
 }
 
 SAFE_EXTENSIONS = {
@@ -149,7 +148,7 @@ class FileAnalyzer:
                             'expected_extensions': list(expected_exts),
                             'actual_extension': actual_ext,
                             'match': False,
-                            'risk_score': 2,
+                            'risk_score': 5,
                             'status': 'mismatch',
                             'warning': f'Extension mismatch! File signature indicates {expected_exts}'
                         }
@@ -158,7 +157,7 @@ class FileAnalyzer:
             return {
                 'magic_detected': file_header[:8].hex(),
                 'match': None,
-                'risk_score': 1,
+                'risk_score': 3,
                 'status': 'unknown',
                 'warning': 'Unknown file signature'
             }
