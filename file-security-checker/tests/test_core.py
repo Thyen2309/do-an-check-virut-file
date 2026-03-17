@@ -133,5 +133,37 @@ class TestRiskScorer(unittest.TestCase):
         self.assertLess(score, 2)
 
 
+    def test_calculate_score_with_behavioral_risk(self):
+        """Behavioral risk should increase final score"""
+        analysis = {
+            'extension': {'risk_score': 0},
+            'magic_number': {'risk_score': 0},
+            'size': {'risk_score': 0},
+            'hash_status': {'risk_score': 0},
+            'double_extension': {'has_double_ext': False, 'risk_score': 0},
+            'behavioral': {'risk_score': 8, 'is_pe': True, 'has_dangerous_apis': True, 'dangerous_api_count': 2}
+        }
+
+        score, level = self.scorer.calculate_score(analysis)
+        self.assertGreater(score, 2)
+        self.assertIn(level, ['MEDIUM', 'HIGH', 'CRITICAL'])
+
+    def test_generate_report_includes_behavioral_results(self):
+        """Detailed report should expose behavioral analysis block"""
+        analysis = {
+            'file_info': {'file_name': 'sample.exe'},
+            'extension': {'risk_score': 3, 'status': 'dangerous', 'extension': 'exe'},
+            'magic_number': {'risk_score': 0, 'match': True},
+            'size': {'risk_score': 0, 'status': 'normal'},
+            'hash_status': {'risk_score': 1, 'status': 'unknown'},
+            'double_extension': {'has_double_ext': False, 'risk_score': 0},
+            'behavioral': {'risk_score': 5, 'is_pe': True, 'is_packed': True, 'packing_types': ['UPX']}
+        }
+
+        report = self.scorer.generate_detailed_report('sample.exe', analysis)
+        self.assertIn('behavioral', report['analysis_results'])
+        self.assertEqual(report['analysis_results']['behavioral']['risk_score'], 5)
+
+
 if __name__ == '__main__':
     unittest.main()

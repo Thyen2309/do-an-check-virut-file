@@ -8,6 +8,7 @@ from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from core.file_analyzer import FileAnalyzer
+from core.behavioral_analyzer import BehavioralAnalyzer
 from core.hash_manager import HashManager
 from core.risk_scorer import RiskScorer
 from database.db_manager import DatabaseManager
@@ -37,6 +38,7 @@ class FileSecurityChecker:
         
         # Initialize components
         self.file_analyzer = FileAnalyzer()
+        self.behavioral_analyzer = BehavioralAnalyzer()
         self.hash_manager = HashManager(
             self.config.get('malware_db_path')
         )
@@ -102,6 +104,12 @@ class FileSecurityChecker:
                     }
             
             # Step 4: Calculate risk score
+            extension_status = analysis.get('extension', {}).get('status')
+            if extension_status == 'dangerous':
+                behavior_result = self.behavioral_analyzer.analyze_pe_file(file_path)
+                if 'error' not in behavior_result:
+                    analysis['behavioral'] = behavior_result
+
             risk_score, risk_level = self.risk_scorer.calculate_score(analysis)
             
             # Step 5: Generate detailed report
